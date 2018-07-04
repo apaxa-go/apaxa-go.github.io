@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff0000">
+    <meta name="msapplication-TileColor" content="#f7f7f7">
+    <meta name="theme-color" content="#f7f7f7">
+    <title>AGUI Concepts</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+<body id="page-concepts">
+<div id="head">
+    <div>
+        <div id="logo">Apaxa GUI</div>
+        <div id="menu">
+            <a href="index.html">About</a>
+            <a href="status.html">Status</a>
+            <a href="features.html">Features</a>
+            <a class="current" href="concepts.html">Concepts</a>
+            <a href="todo.html">Plans</a>
+            <a href="license.html">License</a>
+            <a href="https://github.com/apaxa-go/gui" target="_blank">GitHub</a>
+        </div>
+    </div>
+</div>
+<div id="main">
+    <div>
+        <h1>Control's geometry</h1>
+        <h2>Control itself does not directly control its size</h2>
+        <p>Instead of setting self size directly Control can announce 3 parameters per direction
+            (horizontal/vertical):</p>
+        <ul>
+            <li>
+                Minimum size - minimum required amount of space.
+                All parents must follow this value and must guarantee that Control receives not less space.
+                This is the only guaranteed geometry parameter.
+            </li>
+            <li>
+                Best size - size at which Control can draw itself in best way.
+                This parameter is just a recommendation.
+            </li>
+            <li>
+                Maximum size - maximum size at which Control want draw itself.
+                It is not always possible to follow this restriction.
+                For example if window has 2 visible Controls arranged vertically (Control A over Control B)
+                and Control A minimum width large than Control B maximum width, then both Controls must have the same
+                width.
+                In this case Control B receive large width than it announce as maximum.
+            </li>
+        </ul>
+        <p>The following restriction applies to these parameters: minimum ≤ best ≤ maximum.</p>
+        <p>
+            GUI geometry hypervisor (special algorithm implemented by window) takes these parameters and and after
+            computation sets appropriate width and height for Control.
+            When Control draw itself it uses these width and height as a available region,
+            but can decide (especially if region is large than announced maximum size) to draw itself only on some part
+            of available region,
+            in center for example.
+        </p>
+        <h2>Width has priority over height</h2>
+        <p>
+            Width is a primary dimension and height is secondary dimension.
+            This is because in most cases text is horizontal oriented and peoples prefer vertical scroll over
+            horizontal.
+            Priority of width means following: height is a function of width.
+            For example we have some long text and want to draw it, then height will be depend on available width (how
+            much line breaks required).
+        </p>
+        <h2>Algorithm</h2>
+        <p>Following algorithm used to achieve "Control itself does not directly control its size" and "Width has
+            priority over height" (Control's point of view):</p>
+        <ol>
+            <li>Geometry hypervisor (GH) asks Control about minimal, best and maximum width. Control computes requested
+                parameter based on what exactly and how it would draw.
+            </li>
+            <li>GH set Control's width (and horizontal position in window coordinates).</li>
+            <li>GH asks Control about minimal, best and maximum height. Here Control can use width from previous step to
+                compute requested parameters.
+            </li>
+            <li>GH set Control's height (and vertical position in window coordinates).</li>
+            <li>GH request Control to draw. Control draw itself somewhere in region defined by step 2 & 4 of this
+                algorithm.
+            </li>
+        </ol>
+        <h1>Events</h1>
+        <p>Events can be categorized by how Controls receive them:</p>
+        <table>
+            <tr>
+                <th>Event</th>
+                <th>Receiving</th>
+            </tr>
+            <tr>
+                <td>Keyboard events<br>(press/release non-modifier key)</td>
+                <td>
+                    Control which is focused receives this event.<br>
+                    Control must decide does it accept event or not.<br>
+                    If event is not accepted by Control then it will be sent to Control's parent (iterating up to
+                    window).
+                </td>
+            </tr>
+            <tr>
+                <td>Pointer button press events<br>(press mouse button)</td>
+                <td rowspan="2">
+                    Topmost (in term of Z index) Control under pointer receives this event.<br>
+                    Control must decide does it accept event or not.<br>
+                    If event is not accepted by Control then it will be sent to "less topmost" Control under pointer
+                    (iterating up to window).
+                </td>
+            </tr>
+            <tr>
+                <td>Scroll event<br>(scroll mouse wheel)</td>
+            </tr>
+            <tr>
+                <td>Pointer button other events<br>(release/click mouse button)</td>
+                <td rowspan="2">
+                    Control which receives (and accepts) appropriate pointer button press event receives this event.<br>
+                    Event will not be sent to other Controls even if it was not been accepted.
+                </td>
+            </tr>
+            <tr>
+                <td>Pointer drag events<br>(drag using mouse button)</td>
+            </tr>
+            <tr>
+                <td>Modifiers events<br>(press/release keyboard modifier key)</td>
+                <td rowspan="3">All Controls which have previously subscribed to this type of events.</td>
+            </tr>
+            <tr>
+                <td>Window main state event<br>(window become/stop becoming main)</td>
+            </tr>
+            <tr>
+                <td>Window display state event<br>(relates to minimized/maximized/full screen state)</td>
+            </tr>
+            <tr>
+
+            </tr>
+        </table>
+    </div>
+</div>
+<div id="foot">
+    <div>
+        <div>© 2018 <a href="mailto:contact@apaxa.io">Apaxa</a></div>
+    </div>
+</div>
+</body>
+</html>
