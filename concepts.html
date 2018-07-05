@@ -36,31 +36,30 @@
             (horizontal/vertical):</p>
         <ul>
             <li>
-                Minimum size - minimum required amount of space.
+                Minimum size — minimum required amount of space.
                 All parents must follow this value and must guarantee that Control receives not less space.
                 This is the only guaranteed geometry parameter.
             </li>
             <li>
-                Best size - size at which Control can draw itself in best way.
+                Best size — size at which Control can draw itself in the best way.
                 This parameter is just a recommendation.
             </li>
             <li>
-                Maximum size - maximum size at which Control want draw itself.
+                Maximum size — maximum size at which Control want draw itself.
                 It is not always possible to follow this restriction.
                 For example if window has 2 visible Controls arranged vertically (Control A over Control B)
-                and Control A minimum width large than Control B maximum width, then both Controls must have the same
+                and Control A minimum width larger than Control B maximum width, then both Controls must have the same
                 width.
-                In this case Control B receive large width than it announce as maximum.
+                In this case Control B receive larger width than it announce as maximum.
             </li>
         </ul>
         <p>The following restriction applies to these parameters: minimum ≤ best ≤ maximum.</p>
         <p>
-            GUI geometry hypervisor (special algorithm implemented by window) takes these parameters and and after
+            GUI geometry hypervisor (special algorithm implemented by window) takes these parameters and after
             computation sets appropriate width and height for Control.
-            When Control draw itself it uses these width and height as a available region,
-            but can decide (especially if region is large than announced maximum size) to draw itself only on some part
-            of available region,
-            in center for example.
+            When Control draw itself it uses these width and height as an available region,
+            but can decide (especially if region is larger than announced maximum size) to draw itself only on some part
+            of available region, in center for example.
         </p>
         <h2>Width has priority over height</h2>
         <p>
@@ -68,12 +67,12 @@
             This is because in most cases text is horizontal oriented and peoples prefer vertical scroll over
             horizontal.
             Priority of width means following: height is a function of width.
-            For example we have some long text and want to draw it, then height will be depend on available width (how
+            For example, we have some long text and want to draw it, then height will depend on available width (how
             much line breaks required).
         </p>
         <h2>Algorithm</h2>
-        <p>Following algorithm used to achieve "Control itself does not directly control its size" and "Width has
-            priority over height" (Control's point of view):</p>
+        <p>Following algorithm used to achieve “Control itself does not directly control its size” and “Width has
+            priority over height” (Control's point of view):</p>
         <ol>
             <li>Geometry hypervisor (GH) asks Control about minimal, best and maximum width. Control computes requested
                 parameter based on what exactly and how it would draw.
@@ -99,7 +98,7 @@
                 <td>
                     Control which is focused receives this event.<br>
                     Control must decide does it accept event or not.<br>
-                    If event is not accepted by Control then it will be sent to Control's parent (iterating up to
+                    If event is not accepted by Control, then it will be sent to Control's parent (iterating up to
                     window).
                 </td>
             </tr>
@@ -108,7 +107,7 @@
                 <td rowspan="2">
                     Topmost (in term of Z index) Control under pointer receives this event.<br>
                     Control must decide does it accept event or not.<br>
-                    If event is not accepted by Control then it will be sent to "less topmost" Control under pointer
+                    If event is not accepted by Control then it will be sent to “less topmost” Control under pointer
                     (iterating up to window).
                 </td>
             </tr>
@@ -119,7 +118,7 @@
                 <td>Pointer button other events<br>(release/click mouse button)</td>
                 <td rowspan="2">
                     Control which receives (and accepts) appropriate pointer button press event receives this event.<br>
-                    Event will not be sent to other Controls even if it was not been accepted.
+                    Event will not be sent to other Controls even if it was not accepted.
                 </td>
             </tr>
             <tr>
