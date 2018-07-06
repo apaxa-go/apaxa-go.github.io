@@ -177,15 +177,30 @@ body#page-concepts td:first-child {
   white-space: nowrap;
 }
 
-body#page-about #main .demo-video {
-  float: right;
-  padding-left: 20px;
-  padding-bottom: 10px;
-  > video {
-    width: 400px;
+body#page-about #main {
+  #donation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    > div {
+      text-align: center;
+      > img.qr-code {
+        width: 100px;
+      }
+    }
   }
-  > div {
-    text-align: center;
-    line-height: normal;
+  .demo-video {
+    float: right;
+    padding-left: 20px;
+    padding-bottom: 10px;
+    > video {
+      width: 400px;
+    }
+    > div {
+      text-align: center;
+      line-height: normal;
+    }
   }
 }

@@ -153,6 +153,22 @@ a:hover {
 body#page-concepts td:first-child {
   white-space: nowrap;
 }
+
+body#page-about #main #donation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+body#page-about #main #donation > div {
+    text-align: center;
+}
+
+body#page-about #main #donation > div > img.qr-code {
+    width: 100px;
+}
 body#page-about #main .demo-video {
   float: right;
   padding-left: 20px;
