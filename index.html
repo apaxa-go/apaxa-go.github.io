@@ -94,11 +94,6 @@
             <div id="donation">
                 <div>
                     <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-                        <select id="paypal-currency" name="currency_code">
-                            <option value="USD" selected>USD $</option>
-                            <option value="EUR">EUR €</option>
-                            <option value="RUB">RUB ₽</option>
-                        </select><br>
                         <input type="hidden" name="cmd" value="_donations">
                         <input type="hidden" name="business" value="V4D5EP5X7VJQC">
                         <input type="hidden" name="lc" value="US">
@@ -108,7 +103,12 @@
                         <input type="hidden" name="no_shipping" value="1">
                         <input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHosted">
                         <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" name="submit" alt="Donate via PayPal">
-                        <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                        <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"><br>
+                        <select id="paypal-currency" name="currency_code">
+                            <option value="USD" selected>USD $</option>
+                            <option value="EUR">EUR €</option>
+                            <option value="RUB">RUB ₽</option>
+                        </select>
                     </form>
                 </div>
                 <div>
