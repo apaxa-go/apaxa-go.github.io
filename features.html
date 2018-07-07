@@ -54,16 +54,14 @@
                     (both
                     X and Wayland).
                 </li>
-                <li>Single binary. GoLang usually performs static linking with no external dependencies. We, on other
-                    side, make all to avoid external runtime dependencies (like importing images into source code at
+                <li>Single binary. GoLang usually performs static linking. On the other side we do everything to avoid
+                    external runtime dependencies (like importing images into source code at
                     compile time). Expected size for simple application is about 10Mb.
                 </li>
-                <li>Simple deploy. Because of binary is native and has no external runtime dependencies deploy in most
-                    cases can be really simple — just download and run.
+                <li>Simple deploy. Binary is native and has no external runtime dependencies so deploy can be really simple — just download and run.
                 </li>
-                <li>HiDPI support. Support of high resolution was in project from the beginning. It does matter of which
-                    resolution is monitor — FullHD 1920x1080, 4K 3840x2160 or even 8K 7680 × 4320, in any
-                    case interface will be automatically scaled to appropriate size.
+                <li>HiDPI support. It does not matter of which resolution is monitor — FullHD 1920x1080, 4K 3840x2160 or
+                    even 8K 7680 × 4320. In any case interface will be automatically scaled to appropriate size.
                 </li>
             </ul>
         </div>
@@ -82,11 +80,10 @@
             <h2>GUI</h2>
             <ul>
                 <li>Flexible layout system. There are no restrictions for layout. It is possible to implement fixed,
-                    fluid or
-                    responsive layout, just implement required layout as control.
+                    fluid or responsive layout, just implement required layout as control.
                 </li>
-                <li>No CSS, no JavaScript, no other styling/scripting languages. Apps will be looked and behave as
-                    developer decided. And of course there is no related runtime overhead.
+                <li>No CSS, no JavaScript, no other styling/scripting languages. Apps look and behave as
+                    developer decide. And of course there is no related runtime overhead.
                 </li>
                 <li>Full control of window. Developer may control all regions of window, even status bar. And Controls
                     help to make window looks and behaves like native.
@@ -96,7 +93,7 @@
         <div>
             <h2>Controls</h2>
             <ul>
-                <li>Compact. Default controls does not contain large spaces/paddings/margins. No waste of space.</li>
+                <li>Compact. Default controls do not contain large spaces/paddings/margins. No waste of space.</li>
             </ul>
         </div>
     </div>

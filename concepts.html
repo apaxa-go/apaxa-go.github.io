@@ -42,13 +42,13 @@
 <div id="main">
     <div>
         <h1>Control's geometry</h1>
-        <h2>Control itself does not directly control its size</h2>
-        <p>Instead of setting self size directly Control can announce 3 parameters per direction
+        <h2>Control does not directly adjust its size</h2>
+        <p>Instead of adjust self size directly Control can announce 3 parameters per direction
             (horizontal/vertical):</p>
         <ul>
             <li>
                 Minimum size — minimum required amount of space.
-                All parents must follow this value and must guarantee that Control receives not less space.
+                Parent must follow this value and guarantee that Control gets enough space.
                 This is the only guaranteed geometry parameter.
             </li>
             <li>
@@ -58,10 +58,10 @@
             <li>
                 Maximum size — maximum size at which Control want draw itself.
                 It is not always possible to follow this restriction.
-                For example if window has 2 visible Controls arranged vertically (Control A over Control B)
+                For example, if window has 2 visible Controls arranged vertically (Control A over Control B)
                 and Control A minimum width larger than Control B maximum width, then both Controls must have the same
                 width.
-                In this case Control B receive larger width than it announce as maximum.
+                In this case Control B receives larger width than it announce as maximum.
             </li>
         </ul>
         <p>The following restriction applies to these parameters: minimum ≤ best ≤ maximum.</p>
@@ -75,14 +75,14 @@
         <h2>Width has priority over height</h2>
         <p>
             Width is a primary dimension and height is secondary dimension.
-            This is because in most cases text is horizontal oriented and peoples prefer vertical scroll over
+            This is because in most cases text is horizontal oriented and people prefer vertical scroll over
             horizontal.
-            Priority of width means following: height is a function of width.
+            Priority of width means: height is a function of width.
             For example, we have some long text and want to draw it, then height will depend on available width (how
             much line breaks required).
         </p>
         <h2>Algorithm</h2>
-        <p>Following algorithm used to achieve “Control itself does not directly control its size” and “Width has
+        <p>Following algorithm used to achieve “Control does not directly adjust its size” and “Width has
             priority over height” (Control's point of view):</p>
         <ol>
             <li>Geometry hypervisor (GH) asks Control about minimal, best and maximum width. Control computes requested
@@ -117,7 +117,7 @@
                 <td>Pointer button press events<br>(press mouse button)</td>
                 <td rowspan="2">
                     Topmost (in term of Z index) Control under pointer receives this event.<br>
-                    Control must decide does it accept event or not.<br>
+                    Control must decide whether to accept the event or not.<br>
                     If event is not accepted by Control then it will be sent to “less topmost” Control under pointer
                     (iterating up to window).
                 </td>
@@ -128,7 +128,7 @@
             <tr>
                 <td>Pointer button other events<br>(release/click mouse button)</td>
                 <td rowspan="2">
-                    Control which receives (and accepts) appropriate pointer button press event receives this event.<br>
+                    Control that received (and accepted) the corresponding pointer button press event receives this event.<br>
                     Event will not be sent to other Controls even if it was not accepted.
                 </td>
             </tr>
@@ -140,7 +140,7 @@
                 <td rowspan="3">All Controls which have previously subscribed to this type of events.</td>
             </tr>
             <tr>
-                <td>Window main state event<br>(window become/stop becoming main)</td>
+                <td>Window main state event<br>(window becomes main/background)</td>
             </tr>
             <tr>
                 <td>Window display state event<br>(relates to minimized/maximized/full screen state)</td>
